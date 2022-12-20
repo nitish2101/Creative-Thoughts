@@ -32,7 +32,7 @@ export default function Home() {
         <h2>See what other people are saying</h2>
         {allPosts.map((post) => (
           // eslint-disable-next-line react/jsx-key
-          <Message {...post}></Message>
+          <Message key={post.id} {...post}></Message>
         ))}
       </div>
     </div>
