@@ -3,6 +3,7 @@ import Message from "../Components/message";
 import { useEffect, useState } from "react";
 import { db } from "../utils/firebase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import Link from "next/link";
 
 export default function Home() {
   // create a state with posts
@@ -32,7 +33,14 @@ export default function Home() {
         <h2>See what other people are saying</h2>
         {allPosts.map((post) => (
           // eslint-disable-next-line react/jsx-key
-          <Message key={post.id} {...post}></Message>
+          <Message key={post.id} {...post}>
+            <Link href={{ pathname: `/${post.id}`, query: { ...post } }}>
+              <button className='text-gray-400'>
+                {post.comments?.length > 0 ? post.comments?.length : "0"}{" "}
+                comments
+              </button>
+            </Link>
+          </Message>
         ))}
       </div>
     </div>
